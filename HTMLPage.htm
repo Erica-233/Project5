@@ -1,0 +1,676 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多功能企业门户网站</title>
+    <style>
+        /* 全局样式 */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: var(--dark-color);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--light-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+            .nav-links li {
+                margin-left: 2rem;
+            }
+
+            .nav-links a {
+                color: white;
+                text-decoration: none;
+                transition: color 0.3s;
+                position: relative;
+            }
+
+                .nav-links a:hover {
+                    color: var(--secondary-color);
+                }
+
+                .nav-links a::after {
+                    content: '';
+                    position: absolute;
+                    width: 0;
+                    height: 2px;
+                    background: var(--secondary-color);
+                    bottom: -5px;
+                    left: 0;
+                    transition: width 0.3s;
+                }
+
+                .nav-links a:hover::after {
+                    width: 100%;
+                }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* 轮播图 */
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 0 20%;
+        }
+
+            .slide.active {
+                opacity: 1;
+            }
+
+        .slide-content {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 10px;
+            animation: fadeIn 1.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+
+        .slider-nav-item {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .slider-nav-item.active {
+                background-color: white;
+            }
+
+        /* 主要内容区域 */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+
+            .section-title::after {
+                content: '';
+                position: absolute;
+                width: 80px;
+                height: 3px;
+                background: var(--primary-color);
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+            .feature-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* 表单样式 */
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+            .form-control:focus {
+                border-color: var(--primary-color);
+                outline: none;
+            }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+            .btn:hover {
+                background: #2980b9;
+            }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        /* 数据表格 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+            .data-table th, .data-table td {
+                padding: 1rem;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .data-table th {
+                background: var(--dark-color);
+                color: white;
+            }
+
+            .data-table tr:hover {
+                background-color: #f5f5f5;
+            }
+
+        /* 页脚 */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .footer-section {
+            text-align: left;
+        }
+
+            .footer-section h3 {
+                margin-bottom: 1.5rem;
+                position: relative;
+                display: inline-block;
+            }
+
+                .footer-section h3::after {
+                    content: '';
+                    position: absolute;
+                    width: 50%;
+                    height: 2px;
+                    background: var(--primary-color);
+                    bottom: -8px;
+                    left: 0;
+                }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+            .social-links a {
+                color: white;
+                font-size: 1.5rem;
+                transition: color 0.3s;
+            }
+
+                .social-links a:hover {
+                    color: var(--secondary-color);
+                }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--dark-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.5s;
+            }
+
+                .nav-links.active {
+                    left: 0;
+                }
+
+                .nav-links li {
+                    margin: 1.5rem 0;
+                }
+
+            .hamburger {
+                display: block;
+            }
+
+            .slide {
+                padding: 0 10%;
+            }
+
+            .slider {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slider {
+                height: 300px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-left {
+            animation: slideInFromLeft 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">企业门户</div>
+        <ul class="nav-links">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#features">功能</a></li>
+            <li><a href="#products">产品</a></li>
+            <li><a href="#contact">联系我们</a></li>
+            <li><a href="#about">关于我们</a></li>
+        </ul>
+        <div class="hamburger">☰</div>
+    </nav>
+
+    <!-- 轮播图 -->
+    <section class="slider" id="home">
+        <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://source.unsplash.com/random/1600x900/?business')">
+            <div class="slide-content">
+                <h2>创新科技解决方案</h2>
+                <p>为企业提供全方位的数字化转型服务，助力您的业务增长</p>
+                <button class="btn" style="margin-top: 1rem;">了解更多</button>
+            </div>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://source.unsplash.com/random/1600x900/?technology')">
+            <div class="slide-content">
+                <h2>智能数据分析平台</h2>
+                <p>利用人工智能和大数据技术，为您提供精准的商业洞察</p>
+                <button class="btn" style="margin-top: 1rem;">免费试用</button>
+            </div>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://source.unsplash.com/random/1600x900/?meeting')">
+            <div class="slide-content">
+                <h2>专业团队支持</h2>
+                <p>我们的专家团队随时为您提供技术支持和咨询服务</p>
+                <button class="btn" style="margin-top: 1rem;">联系我们</button>
+            </div>
+        </div>
+        <div class="slider-nav">
+            <div class="slider-nav-item active"></div>
+            <div class="slider-nav-item"></div>
+            <div class="slider-nav-item"></div>
+        </div>
+    </section>
+
+    <!-- 主要功能区域 -->
+    <section class="container" id="features">
+        <h2 class="section-title">我们的核心功能</h2>
+        <div class="features">
+            <div class="feature-card animate-left">
+                <div class="feature-icon">📊</div>
+                <h3>数据分析</h3>
+                <p>强大的数据分析工具，帮助您从海量数据中提取有价值的信息，做出更明智的决策。</p>
+            </div>
+            <div class="feature-card animate-left" style="animation-delay: 0.2s;">
+                <div class="feature-icon">🤖</div>
+                <h3>人工智能</h3>
+                <p>先进的AI技术，自动化您的业务流程，提高效率，降低成本。</p>
+            </div>
+            <div class="feature-card animate-left" style="animation-delay: 0.4s;">
+                <div class="feature-icon">🌐</div>
+                <h3>云端服务</h3>
+                <p>安全可靠的云服务平台，随时随地访问您的数据和应用程序。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品展示 -->
+    <section class="container" id="products">
+        <h2 class="section-title">我们的产品</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>产品名称</th>
+                    <th>描述</th>
+                    <th>价格</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="product-table">
+                <!-- 产品数据将通过JavaScript动态加载 -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- 联系表单 -->
+    <section class="container" id="contact">
+        <h2 class="section-title">联系我们</h2>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">姓名</label>
+                <input type="text" id="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">电子邮箱</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">电话号码</label>
+                <input type="tel" id="phone" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="subject">主题</label>
+                <select id="subject" class="form-control" required>
+                    <option value="">请选择...</option>
+                    <option value="sales">销售咨询</option>
+                    <option value="support">技术支持</option>
+                    <option value="feedback">产品反馈</option>
+                    <option value="other">其他</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">留言内容</label>
+                <textarea id="message" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-block">提交</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>关于我们</h3>
+                <p>我们是一家专注于企业数字化转型的科技公司，致力于为客户提供最优质的产品和服务。</p>
+            </div>
+            <div class="footer-section">
+                <h3>快速链接</h3>
+                <ul style="list-style: none;">
+                    <li><a href="#home" style="color: white; text-decoration: none;">首页</a></li>
+                    <li><a href="#features" style="color: white; text-decoration: none;">功能</a></li>
+                    <li><a href="#products" style="color: white; text-decoration: none;">产品</a></li>
+                    <li><a href="#contact" style="color: white; text-decoration: none;">联系我们</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>关注我们</h3>
+                <div class="social-links">
+                    <a href="#">📱</a>
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
+                    <a href="#">💼</a>
+                </div>
+                <p style="margin-top: 1rem;">订阅我们的新闻通讯</p>
+                <input type="email" placeholder="您的邮箱地址" style="padding: 0.5rem; width: 100%; margin-top: 0.5rem;">
+                <button class="btn" style="margin-top: 0.5rem; width: 100%;">订阅</button>
+            </div>
+        </div>
+        <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p>&copy; 2023 企业门户. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏响应式
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // 轮播图功能
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-nav-item');
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        // 自动轮播
+        let slideInterval = setInterval(nextSlide, 5000);
+
+        // 点击导航点切换
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                showSlide(index);
+                slideInterval = setInterval(nextSlide, 5000);
+            });
+        });
+
+        // 加载产品数据
+        document.addEventListener('DOMContentLoaded', function() {
+            // 模拟从API获取数据
+            const products = [
+                { name: "企业版", description: "完整功能套件，适合中大型企业", price: "¥999/月" },
+                { name: "专业版", description: "高级功能，适合中小企业", price: "¥499/月" },
+                { name: "基础版", description: "基本功能，适合初创公司", price: "¥199/月" },
+                { name: "免费版", description: "有限功能，适合个人用户", price: "免费" }
+            ];
+
+            const tableBody = document.getElementById('product-table');
+
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.name}</td>
+                    <td>${product.description}</td>
+                    <td>${product.price}</td>
+                    <td><button class="btn" style="padding: 0.3rem 0.8rem;">购买</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // 表单提交处理
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // 获取表单数据
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value
+                };
+
+                // 这里通常会发送到服务器，这里我们只存储在本地存储中
+                localStorage.setItem('contactFormData', JSON.stringify(formData));
+
+                // 显示成功消息
+                alert('感谢您的留言！我们会尽快与您联系。');
+
+                // 重置表单
+                this.reset();
+            });
+
+            // 从本地存储加载表单数据（演示用）
+            const savedFormData = localStorage.getItem('contactFormData');
+            if (savedFormData) {
+                const formData = JSON.parse(savedFormData);
+                document.getElementById('name').value = formData.name || '';
+                document.getElementById('email').value = formData.email || '';
+                document.getElementById('phone').value = formData.phone || '';
+                document.getElementById('subject').value = formData.subject || '';
+                document.getElementById('message').value = formData.message || '';
+            }
+
+            // 滚动动画
+            const animateElements = document.querySelectorAll('.animate-left');
+
+            function checkScroll() {
+                animateElements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', checkScroll);
+            checkScroll(); // 初始检查
+        });
+    </script>
+</body>
+</html>

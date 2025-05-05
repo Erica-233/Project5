@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="内閣官房公式サイト - 豊川祥子内閣の政策情報と行政サービス">
+    <title>内閣官房 - 豊川内閣ポータル</title>
+    <style>
+        /* 基本リセット */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+        }
+
+        /* カスタムプロパティ */
+        :root {
+            --theme-green: #2e7d32;
+            --theme-red: #d32f2f;
+            --theme-gold: #ffd600;
+            --theme-dark: #004d40;
+            --text-primary: #333;
+            --text-secondary: #666;
+        }
+
+        /* 基本スタイル */
+        body {
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ヘッダー */
+        .emergency-alert {
+            background: linear-gradient(90deg, var(--theme-red) 0%, var(--theme-dark) 100%);
+            color: white;
+            padding: 1rem 0;
+            font-size: 0.9em;
+        }
+
+            .emergency-alert .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+        .gov-header {
+            background: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+            .logo-group img {
+                height: 60px;
+            }
+
+        /* ナビゲーション */
+        .main-nav {
+            background: var(--theme-green);
+            border-top: 3px solid var(--theme-gold);
+        }
+
+        .nav-list {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .nav-item {
+            margin: 0 1.5rem;
+            position: relative;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+            .nav-link:hover {
+                background: rgba(255,255,255,0.1);
+                border-radius: 4px;
+            }
+
+        /* メインビジュアル */
+        .hero-section {
+            height: 600px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1607582544954-a94f95573ad1');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(165, 105, 105, 0.5);
+        }
+
+        .vision-statement {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* 首相紹介 */
+        .prime-minister-section {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .pm-profile {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .pm-portrait {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .pm-details h2 {
+            color: var(--theme-green);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pm-timeline {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+            .pm-timeline li {
+                padding: 1rem;
+                border-left: 3px solid var(--theme-green);
+                margin-bottom: 1rem;
+            }
+
+        /* 政策セクション */
+        .policy-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--theme-dark);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+            .section-title::after {
+                content: '';
+                display: block;
+                width: 80px;
+                height: 4px;
+                background: var(--theme-gold);
+                margin: 1rem auto;
+            }
+
+        .policy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .policy-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+            .policy-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .policy-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        /* 閣僚リスト */
+        .cabinet-section {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .cabinet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .minister-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+            .minister-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .minister-photo {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .minister-info {
+            padding: 1.5rem;
+        }
+
+        .minister-name {
+            color: var(--theme-green);
+            margin-bottom: 0.5rem;
+        }
+
+        /* フッター */
+        .gov-footer {
+            background: var(--theme-dark);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--theme-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+            .footer-links a {
+                color: white;
+                text-decoration: none;
+                display: block;
+                padding: 0.5rem 0;
+                transition: color 0.3s ease;
+            }
+
+                .footer-links a:hover {
+                    color: var(--theme-gold);
+                }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 2rem;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .pm-profile {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .nav-list {
+                flex-wrap: wrap;
+            }
+
+            .nav-item {
+                margin: 0.5rem;
+            }
+        }
+
+        /* 新增功能样式 */
+        .interaction-section {
+            padding: 4rem 0;
+            background: #f0f7f0;
+        }
+
+        .interaction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .interaction-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+            .interaction-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .interaction-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+        }
+
+        .news-section {
+            padding: 4rem 0;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+            .news-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .news-date {
+            color: var(--theme-green);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .document-section {
+            padding: 4rem 0;
+            background: #f0f0f0;
+        }
+
+        .document-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .document-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+            .document-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .document-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- 緊急通知バー -->
+    <div class="emergency-alert">
+        <div class="container">
+            <span>▶【重要】令和6年能登半島地震復興支援情報（最終更新：2024年3月6日）</span>
+            <a href="#" style="color:white; text-decoration:underline">詳細を見る</a>
+        </div>
+    </div>
+
+    <!-- メインヘッダー -->
+    <header class="gov-header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo-group">
+                    <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.IKEo5dvmoN5nXeMWUSxsmgHaDM?rs=1&pid=ImgDetMain" alt="内閣官房ロゴ">
+                    <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.v6oQ2JMIUFWBYTPWyyJ8FAHaHa?rs=1&pid=ImgDetMain" alt="首相官邸ロゴ">
+                </div>
+                <nav>
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#policy" class="nav-link">重点政策</a></li>
+                        <li class="nav-item"><a href="#cabinet" class="nav-link">内閣構成</a></li>
+                        <li class="nav-item"><a href="#news" class="nav-link">最新情報</a></li>
+                        <li class="nav-item"><a href="#documents" class="nav-link">公文書</a></li>
+                        <li class="nav-item"><a href="#contact" class="nav-link">ご意見箱</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">持続可能な未来への挑戦</h1>
+            <blockquote class="vision-statement">
+                「デジタル革新と自然共生が調和する社会を次世代に引き継ぐ」<br>
+                <cite>- 豊川祥子 内閣総理大臣</cite>
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- 首相プロフィール -->
+
+    <section class="prime-minister-section">
+        <div class="container">
+            <div class="pm-profile">
+                <img src="https://tiebapic.baidu.com/forum/pic/item/c373a7d6912397ddd743f2261f82b2b7d0a287a3.jpg?tbpicau=2025-04-19-05_9fd61323fa83f1bf84664ecdb4c372b0" alt="豊川祥子総理" class="pm-portrait">
+                <div class="pm-details">
+                    <h2>豊川祥子 内閣総理大臣</h2>
+                    <p class="pm-tenure">第101代内閣総理大臣（令和4年11月10日就任）</p>
+                    <h3>政治理念</h3>
+                    <ul class="pm-principles">
+                        <li>kilakiladokidoki</li>
+                        <li>在想</li>
+                        <li>希腊奶</li>
+                    </ul>
+                    <h3>主要経歴</h3>
+                    <ul class="pm-timeline">
+                        <li>令和元年 - 池袋特別区長就任</li>
+                        <li>令和3年 - 内閣府特命担当大臣（地方創生）</li>
+                        <li>令和4年 - 第101代内閣総理大臣就任</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 重点政策 -->
+    <section class="policy-section" id="policy">
+        <div class="container">
+            <h2 class="section-title">重点政策</h2>
+            <div class="policy-grid">
+                <!-- SDGs政策カード -->
+                <div class="policy-card">
+                    <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.umkbIlcnlRJaznT58Hc3QAHaEo?rs=1&pid=ImgDetMain" alt="SDGs" class="policy-icon">
+                    <h3>SDGs先進国家計画</h3>
+                    <ul>
+                        <li>2030年カーボンニュートラル達成</li>
+                        <li>再生可能エネルギー50%比率</li>
+                        <li>循環型経済推進法制定</li>
+                    </ul>
+                </div>
+
+                <!-- デジタル政策カード -->
+                <div class="policy-card">
+                    <img src="https://ts1.tc.mm.bing.net/th/id/R-C.2515ad20e28b998f1fdc4d214424c26f?rik=pVh6mPzQN8OPyA&riu=http%3a%2f%2fi1.hdslb.com%2fbfs%2farchive%2f18e60aab2d59ea36a17860d172a7a6f11e4b4ce5.jpg&ehk=YCDvxwjdtH%2fTN0VlULay%2bKAFM2kQZZgOqs8XJ%2fgxD0M%3d&risl=&pid=ImgRaw&r=0" alt="デジタル" class="policy-icon">
+                    <h3>デジタル田園都市構想</h3>
+                    <ul>
+                        <li>全国光ファイバー網整備</li>
+                        <li>AI行政審査システム導入</li>
+                        <li>スマート農業支援制度</li>
+                    </ul>
+                </div>
+
+                <!-- 社会保障カード -->
+                <div class="policy-card">
+                    <img src="https://ts1.tc.mm.bing.net/th/id/R-C.2515ad20e28b998f1fdc4d214424c26f?rik=pVh6mPzQN8OPyA&riu=http%3a%2f%2fi1.hdslb.com%2fbfs%2farchive%2f18e60aab2d59ea36a17860d172a7a6f11e4b4ce5.jpg&ehk=YCDvxwjdtH%2fTN0VlULay%2bKAFM2kQZZgOqs8XJ%2fgxD0M%3d&risl=&pid=ImgRaw&r=0" alt="社会保障" class="policy-icon">
+                    <h3>全世代型社会保障</h3>
+                    <ul>
+                        <li>こども庁創設（令和6年4月）</li>
+                        <li>高等教育無償化拡充</li>
+                        <li>介護人材待遇改善計画</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 成员 -->
+    <section class="cabinet-section" id="cabinet">
+        <div class="container">
+            <h2 class="section-title">内閣構成</h2>
+            <div class="cabinet-grid">
+                <!-- デジタル大臣 -->
+                <div class="minister-card">
+                    <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.5lPz3bLMdyq-2MnNs8yZUgHaGR?rs=1&pid=ImgDetMainhttps://tse1-mm.cn.bing.net/th/id/OIP-C.5lPz3bLMdyq-2MnNs8yZUgHaGR?rs=1&pid=ImgDetMain" alt="千早愛音大臣" class="minister-photo">
+                    <div class="minister-info">
+                        <h3 class="minister-name">千早 愛音</h3>
+                        <p class="minister-post">デジタル改革担当大臣</p>
+                        <ul class="minister-policy">
+                            <li>政府サービス完全デジタル化</li>
+                            <li>AI行政審査システム導入</li>
+                            <li>地方デジタル人材育成</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 外務大臣 -->
+                <div class="minister-card">
+                    <img src="https://i.bobopic.com/small/111850710.jpg" alt="高松灯大臣" class="minister-photo">
+                    <div class="minister-info">
+                        <h3 class="minister-name">高松 灯</h3>
+                        <p class="minister-post">外務大臣</p>
+                        <ul class="minister-policy">
+                            <li>日米デジタル同盟強化</li>
+                            <li>ASEANデジタル経済圏構想</li>
+                            <li>気候変動国際協力</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 財務大臣 -->
+                <div class="minister-card">
+                    <img src="https://i.bobopic.com/small/110894003.jpg" alt="長崎素世大臣" class="minister-photo">
+                    <div class="minister-info">
+                        <h3 class="minister-name">長崎 素世</h3>
+                        <p class="minister-post">財務大臣</p>
+                        <ul class="minister-policy">
+                            <li>新資本主義予算実現</li>
+                            <li>中小企業支援強化</li>
+                            <li>税制改革推進</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 農林水産大臣 -->
+                <div class="minister-card">
+                    <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.4djaJuXMrWKfvTZqNe-9UgHaHE?rs=1&pid=ImgDetMain" alt="若葉睦大臣" class="minister-photo">
+                    <div class="minister-info">
+                        <h3 class="minister-name">若葉 睦</h3>
+                        <p class="minister-post">農林水産大臣</p>
+                        <ul class="minister-policy">
+                            <li>スマート農業推進</li>
+                            <li>農村環境保護</li>
+                            <li>農産物競争力向上</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 内閣官房長官 -->
+                <div class="minister-card">
+                    <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.JSjJX2PfKlN9hua81uedMwHaH3?rs=1&pid=ImgDetMain" alt="三角初华大臣" class="minister-photo">
+                    <div class="minister-info">
+                        <h3 class="minister-name">三角 初华</h3>
+                        <p class="minister-post">内閣官房長官</p>
+                        <ul class="minister-policy">
+                            <li>政府各部調整</li>
+                            <li>情報管理</li>
+                            <li>危機管理</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 防衛大臣 -->
+                <div class="minister-card">
+                    <img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.ipookg1k5TYJXzWeA2KV_wAAAA?rs=1&pid=ImgDetMain" alt="八潘海玲大臣" class="minister-photo">
+                    <div class="minister-info">
+                        <h3 class="minister-name">八潘 海玲</h3>
+                        <p class="minister-post">防衛大臣</p>
+                        <ul class="minister-policy">
+                            <li>国防現代化</li>
+                            <li>国家安全保障</li>
+                            <li>国際平和維持活動</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 環境大臣 -->
+                <div class="minister-card">
+                    <img src="https://i.bobopic.com/small/126088432.jpg" alt="佑天寺若麦大臣" class="minister-photo">
+                    <div class="minister-info">
+                        <h3 class="minister-name">佑天寺 若麦</h3>
+                        <p class="minister-post">環境大臣</p>
+                        <ul class="minister-policy">
+                            <li>持続可能な発展</li>
+                            <li>炭素中立</li>
+                            <li>生物多様性保護</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                <!-- 在中国大使 -->
+                <div class="minister-card">
+                    <img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.9TJdS5gp0LvBpa4tXJjasQHaHa?rs=1&pid=ImgDetMain" alt="要楽奈大臣" class="minister-photo">
+                    <div class="minister-info">
+                        <h3 class="minister-name">要 楽奈</h3>
+                        <p class="minister-post">在中国大使</p>
+                        <ul class="minister-policy">
+                            <li>日中友好関係強化</li>
+                            <li>文化交流</li>
+                            <li>貿易促進</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 内调情报大臣 -->
+                <div class="minister-card">
+                    <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C._8mtlgg1v3AaelO2_JATUwAAAA?rs=1&pid=ImgDetMain" alt="纯田真奈大臣" class="minister-photo">
+                    <div class="minister-info">
+                        <h3 class="minister-name">纯田 真奈</h3>
+                        <p class="minister-post">内调情报大臣</p>
+                        <ul class="minister-policy">
+                            <li>国内情报收集</li>
+                            <li>分析</li>
+                            <li>国家安全保障</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 互动功能 -->
+    <section class="interaction-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">お問い合わせ</h2>
+            <div class="interaction-grid">
+                <div class="interaction-card">
+                    <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.Xu_h_Z5mahzr40hvjRyuTwHaFd?rs=1&pid=ImgDetMain" alt="オンライン調査" class="interaction-icon">
+                    <h3>オンライン調査</h3>
+                    <p>政府の政策についてご意見をお聞かせください。</p>
+                    <a href="#" class="button">調査に参加する</a>
+                </div>
+                <div class="interaction-card">
+                    <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.TkxD5X7Ae8y-QgaL2b8XcwAAAA?rs=1&pid=ImgDetMain" alt="ご意見箱" class="interaction-icon">
+                    <h3>ご意見箱</h3>
+                    <p>ご意見やご提案をお寄せください。</p>
+                    <a href="#" class="button">意見を送る</a>
+                </div>
+                <div class="interaction-card">
+                    <img src="https://tiebapic.baidu.com/forum/w%3D580%3B/sign=0f7e3a09cc82b9013dadc33b43b6a877/562c11dfa9ec8a13a3a546ceb103918fa0ecc065.jpg?tbpicau=2025-04-10-05_9fc3d7c1e3d6f418050468818d570617" alt="オンライン質問" class="interaction-icon">
+                    <h3>オンライン質問</h3>
+                    <p>毎週水曜日午後2時からオンライン質問会を開催しています。</p>
+                    <a href="#" class="button">質問に参加する</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最新情報 -->
+    <section class="news-section" id="news">
+        <div class="container">
+            <h2 class="section-title">最新情報</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-date">令和6年4月5日</div>
+                    <h3>大阪・関西万博視察</h3>
+                    <p>総理大臣は大阪・関西万博の会場を視察し、関連する計画について説明を受けました。</p>
+                    <a href="#" class="pdf-link">詳細を見る</a>
+                </div>
+                <div class="news-card">
+                    <div class="news-date">令和6年4月4日</div>
+                    <h3>与野党党首会談</h3>
+                    <p>総理大臣は与野党党首と会談し、政策協議を行いました。</p>
+                    <a href="#" class="pdf-link">詳細を見る</a>
+                </div>
+                <div class="news-card">
+                    <div class="news-date">令和6年4月3日</div>
+                    <h3>防衛大学校卒業式</h3>
+                    <p>総理大臣は防衛大学校の卒業式に出席し、訓示を行いました。</p>
+                    <a href="#" class="pdf-link">詳細を見る</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--  -->
+    <section class="document-section" id="documents">
+        <div class="container">
+            <h2 class="section-title">公文書</h2>
+            <div class="document-grid">
+                <div class="document-card">
+                    <img src="https://tiebapic.baidu.com/forum/w%3D580%3B/sign=61163d231f82b2b7a79f39cc0196caef/8d5494eef01f3a29eda770e9df25bc315c607cae.jpg?tbpicau=2025-04-10-05_1590fc1acfdf9172182841292231af60" alt="PDF" class="document-icon">
+                    <h3>令和6年度予算書</h3>
+                    <p>令和6年度の予算書を公開しました。</p>
+                    <a href="#" class="pdf-link">PDFをダウンロード</a>
+                </div>
+                <div class="document-card">
+                    <img src="https://tiebapic.baidu.com/forum/w%3D580%3B/sign=eb6f83d57fdbb6fd255be52e391faa18/8326cffc1e178a8203b4488eb003738da977e810.jpg?tbpicau=2025-04-10-05_132020758d6e7e777dcecbc866b6c3ab" alt="文書" class="document-icon">
+                    <h3>政策白書</h3>
+                    <p>最新の政策白書を公開しました。</p>
+                    <a href="#" class="pdf-link">文書をダウンロード</a>
+                </div>
+                <div class="document-card">
+                    <img src="https://tiebapic.baidu.com/forum/w%3D580%3B/sign=9b5b3a0db236afc30e0c3f6d8322eac4/b999a9014c086e068581488647087bf40bd1cbd6.jpg?tbpicau=2025-04-10-05_056d9b2f3af862fb08d48ed6baaf6041" alt="報告書" class="document-icon">
+                    <h3>政策評価報告書</h3>
+                    <p>政策評価報告書を公開しました。</p>
+                    <a href="#" class="pdf-link">報告書をダウンロード</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--  -->
+    <footer class="gov-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>サイト情報</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">サイトポリシー</a></li>
+                        <li><a href="#">プライバシーポリシー</a></li>
+                        <li><a href="#">アクセシビリティ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>関連リンク</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://space.bilibili.com/402945953?spm_id_from=333.1007.0.0/">首相官邸</a></li>
+                        <li><a href="https://gitee.com/Erica114/">内閣府</a></li>
+                        <li><a href="https://www.exame.com/">デジタル庁</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>連絡先</h3>
+                    <address>
+                        〒100-8968<br>
+                        東京都千代田区永田町1-6-1<br>
+                        TEL:03-1145-141919（代表）<br>
+                        Email: Leemabi@gmail.com
+                    </address>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>© Cabinet Secretariat, Government of Japan</p>
+                <p>全てのコンテンツはクリエイティブ・コモンズ 表示4.0国際ライセンスの下に提供されています</p>
+            </div>
+        </div>
+    </footer>
+
+    <!--  -->
+    <script>
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.gov-header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.policy-card, .minister-card, .news-card, .document-card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease-out';
+            observer.observe(card);
+        });
+
+      
+        const navToggle = document.createElement('button');
+        navToggle.innerHTML = '☰';
+        navToggle.className = 'nav-toggle';
+        document.querySelector('.header-inner').appendChild(navToggle);
+
+        navToggle.addEventListener('click', () => {
+            document.querySelector('.nav-list').classList.toggle('active');
+        });
+
+       
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                alert('お問い合わせページが開きます。');
+            });
+        });
+    </script>
+</body>
+</html>

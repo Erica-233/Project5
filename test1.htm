@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内閣官房ホームページ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        :root {
+            --gov-red: #b71234;
+            --gov-blue: #003f8d;
+        }
+
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-notice {
+            background: linear-gradient(90deg, #b71234 0%, #003f8d 100%);
+            color: white;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9em;
+        }
+
+            .header-notice .container {
+                display: flex;
+                justify-content: space-between;
+            }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+            .logo img {
+                height: 45px;
+                margin-right: 10px;
+            }
+
+        .official-mark {
+            width: 120px;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        nav {
+            background: var(--gov-blue);
+            border-top: 2px solid var(--gov-red);
+            padding: 10px 0;
+        }
+
+            nav ul {
+                display: flex;
+                justify-content: center;
+                list-style: none;
+            }
+
+                nav ul li {
+                    margin: 0 15px;
+                }
+
+                    nav ul li a {
+                        color: #fff;
+                        text-decoration: none;
+                        font-weight: bold;
+                        font-size: 16px;
+                        transition: color 0.3s;
+                    }
+
+                        nav ul li a:hover {
+                            color: #ffd700;
+                        }
+
+        .hero {
+            height: 400px;
+            background-image: url('https://example.com/main_visual.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .section {
+            padding: 50px 0;
+            background-color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: var(--gov-blue);
+        }
+
+        .prime-minister {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+            .prime-minister img {
+                width: 300px;
+                height: 300px;
+                object-fit: cover;
+                border-radius: 50%;
+                margin-bottom: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .prime-minister h3 {
+                font-size: 24px;
+                margin-bottom: 10px;
+                color: var(--gov-blue);
+            }
+
+            .prime-minister p {
+                font-size: 16px;
+                max-width: 800px;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+        .cabinet-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .member-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .member-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .member-card img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+        .member-info {
+            padding: 20px;
+        }
+
+            .member-info h3 {
+                font-size: 20px;
+                margin-bottom: 10px;
+                color: var(--gov-blue);
+            }
+
+            .member-info p {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+
+        .emergency-alert {
+            background-color: #ffd700;
+            padding: 15px;
+            border-left: 5px solid red;
+            margin: 20px 0;
+        }
+
+        .koho {
+            border: 1px solid #ddd;
+            padding: 20px;
+            background: url('https://example.com/bg_koho.png') repeat;
+            margin: 20px 0;
+        }
+
+        .koho-header {
+            border-bottom: 2px solid var(--gov-red);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+            .koho-header .date {
+                font-size: 0.9em;
+                color: #666;
+                margin-right: 10px;
+            }
+
+            .koho-header .department {
+                font-size: 0.9em;
+                color: #666;
+            }
+
+        .news-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .news-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .news-item .category {
+                display: inline-block;
+                background-color: var(--gov-red);
+                color: white;
+                padding: 3px 8px;
+                font-size: 0.8em;
+                border-radius: 3px;
+                margin-bottom: 8px;
+            }
+
+            .news-item .date {
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 10px;
+            }
+
+            .news-item h3 {
+                font-size: 18px;
+                margin-bottom: 10px;
+                color: #333;
+            }
+
+            .news-item .pdf-link {
+                display: inline-block;
+                margin-top: 10px;
+                color: var(--gov-blue);
+                text-decoration: none;
+            }
+
+        .interaction {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .interaction-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .interaction-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .interaction-card h3 {
+                font-size: 20px;
+                margin-bottom: 15px;
+                color: var(--gov-blue);
+            }
+
+            .interaction-card p {
+                margin-bottom: 15px;
+            }
+
+            .interaction-card a {
+                display: inline-block;
+                background-color: var(--gov-red);
+                color: #fff;
+                padding: 10px 20px;
+                border-radius: 5px;
+                text-decoration: none;
+                transition: background-color 0.3s;
+            }
+
+                .interaction-card a:hover {
+                    background-color: #9a102c;
+                }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ddd;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+            .footer-section a:hover {
+                color: #fff;
+            }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            margin-top: 30px;
+        }
+
+        .footer-legal {
+            background-color: #2a2a2a;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+            .footer-legal p {
+                margin-bottom: 10px;
+                font-size: 0.9em;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+                nav ul li {
+                    margin: 5px 0;
+                }
+
+            .hero {
+                height: 300px;
+            }
+
+            .hero-content h1 {
+                font-size: 28px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .prime-minister img {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-notice">
+        <div class="container">
+            <span>▶ 令和6年能登半島地震関連情報</span>
+            <span>▶ マイナンバーカード総合サイト</span>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <img src="https://example.com/logo_kantei.png" alt="内閣府" class="official-mark">
+            <div class="logo">
+                <img src="https://example.com/logo_cas.png" alt="内閣官房">
+                <img src="https://example.com/logo_kantei.png" alt="首相官邸">
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#home">ホーム</a></li>
+                <li><a href="#prime-minister">総理大臣</a></li>
+                <li><a href="#cabinet">閣僚名簿</a></li>
+                <li><a href="#policies">政策・施策</a></li>
+                <li><a href="#news">新着情報</a></li>
+                <li><a href="#links">各省庁サイト</a></li>
+                <li><a href="#interaction">ご意見・お問い合わせ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="emergency-alert">
+            <strong>【緊急】</strong>令和6年能登半島地震への対応について（令和6年3月6日更新）
+        </div>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>内閣官房</h1>
+            <p>豊かな未来へ、共に歩みましょう</p>
+        </div>
+    </section>
+
+    <section class="section" id="prime-minister">
+        <div class="container">
+            <h2 class="section-title">総理大臣紹介</h2>
+            <div class="prime-minister">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="豊川祥子">
+                <h3>豊川祥子 総理大臣</h3>
+                <p>豊川祥子は、日本の第101代内閣総理大臣です。彼女は池袋の地元政治家としてキャリアをスタートさせ、その卓越した指導力と政策立案能力から、国民の広い支持を受けています。</p>
+                <p>政治理念：以民为本，推动社会公平与可持续发展。</p>
+                <p>主要政绩：自衛隊の災害救助改革、环境保护、国际合作。</p>
+                <p>豊川首相は常に国民の声に耳を傾け、持続可能な社会の実現を目指しています。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="cabinet">
+        <div class="container">
+            <h2 class="section-title">閣僚名簿</h2>
+            <div class="cabinet-members">
+                <div class="member-card">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="長崎素世">
+                    <div class="member-info">
+                        <h3>長崎素世 財務大臣</h3>
+                        <p>経済政策：安定した経済成長、中小企業支援、税制改革。</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <img src="https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="高松灯">
+                    <div class="member-info">
+                        <h3>高松灯 外務大臣</h3>
+                        <p>外交戦略：国際協力の強化、平和維持、自由貿易促進。</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <img src="https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="若葉睦">
+                    <div class="member-info">
+                        <h3>若葉睦 農林水産大臣</h3>
+                        <p>農業政策：現代農業技術の発展、農村環境の保護、農産物の競争力向上。</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="三角初华">
+                    <div class="member-info">
+                        <h3>三角初华 内閣官房長官</h3>
+                        <p>役割：政府各部の調整、情報管理、危機管理。</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="八潘海玲">
+                    <div class="member-info">
+                        <h3>八潘海玲 防衛大臣</h3>
+                        <p>国防政策：国防現代化、国家安全保障、国際平和維持活動。</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <img src="https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="佑天寺若麦">
+                    <div class="member-info">
+                        <h3>佑天寺若麦 環境大臣</h3>
+                        <p>環境政策：持続可能な発展、炭素中立、生物多様性保護。</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="千早愛音">
+                    <div class="member-info">
+                        <h3>千早愛音 万博担当大臣</h3>
+                        <p>万博業務：2025年大阪万博の準備、日本文化の普及、経済発展の促進。</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="要楽奈">
+                    <div class="member-info">
+                        <h3>要楽奈 在中国大使</h3>
+                        <p>外交貢献：日中友好関係の強化、文化交流、貿易促進。</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="纯田真奈">
+                    <div class="member-info">
+                        <h3>纯田真奈 内调情报大臣</h3>
+                        <p>内调情报：国内情报收集、分析、国家安全保障。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="news">
+        <div class="container">
+            <h2 class="section-title">新着情報（令和6年3月6日更新）</h2>
+            <div class="news-list">
+                <div class="koho">
+                    <div class="koho-header">
+                        <span class="date">令和6年3月6日</span>
+                        <span class="department">内閣官房</span>
+                    </div>
+                    <h3>閣議決定について</h3>
+                    <p>本日の閣議で以下の事項を決定しました：</p>
+                    <ul>
+                        <li>令和6年度一般会計補正予算案</li>
+                        <li>特別会計に関する法律の一部を改正する法律案</li>
+                        <li>新型コロナウイルス感染症対応地方創生臨時交付金の交付について</li>
+                    </ul>
+                    <a href="#" class="pdf-link">［PDF:215KB］</a>
+                </div>
+
+                <div class="news-item">
+                    <div class="category">人事</div>
+                    <div class="date">令和6年3月5日</div>
+                    <h3>内閣官房副長官補人事について</h3>
+                    <p>令和6年3月5日付で内閣官房副長官補に田中文雄氏が就任しました。</p>
+                    <a href="#" class="pdf-link">［PDF:98KB］</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="policies">
+        <div class="container">
+            <h2 class="section-title">重点政策（令和6年度）</h2>
+            <div class="policies-grid">
+                <div class="policy-card">
+                    <h3>経済再生・財政健全化</h3>
+                    <ul>
+                        <li>新資本主義の実現（令和6年度予算 総額112兆円）</li>
+                        <li>賃上げ・物価高対策パッケージ</li>
+                        <li>デジタル田園都市国家構想の推進</li>
+                    </ul>
+                </div>
+                <div class="policy-card">
+                    <h3>少子化対策</h3>
+                    <ul>
+                        <li>次元の異なる少子化対策（こども家庭庁連携）</li>
+                        <li>出産育児一時金の拡充（50万円→60万円）</li>
+                        <li>児童手当の所得制限撤廃</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="interaction">
+        <div class="container">
+            <h2 class="section-title">ご意見・お問い合わせ</h2>
+            <div class="interaction">
+                <div class="interaction-card">
+                    <h3>オンライン調査</h3>
+                    <p>政府の環境政策にご満足ですか？</p>
+                    <a href="#">調査に参加する</a>
+                </div>
+
+                <div class="interaction-card">
+                    <h3>意見箱</h3>
+                    <p>ご意見やご提案をお寄せください。</p>
+                    <a href="mailto:feedback@gov.jp">意見を送る</a>
+                </div>
+
+                <div class="interaction-card">
+                    <h3>オンライン質問</h3>
+                    <p>毎週水曜日午後2時からオンライン質問会を開催しています。</p>
+                    <a href="#">質問に参加する</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>サイトポリシー</h3>
+                    <a href="#">プライバシーポリシー</a>
+                    <a href="#">免責事項</a>
+                    <a href="#">アクセシビリティ方針</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>サイトマップ</h3>
+                    <a href="#home">ホーム</a>
+                    <a href="#prime-minister">総理大臣</a>
+                    <a href="#cabinet">閣僚名簿</a>
+                    <a href="#policies">政策・施策</a>
+                    <a href="#news">新着情報</a>
+                    <a href="#interaction">ご意見・お問い合わせ</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>関連リンク</h3>
+                    <a href="https://www.mofa.go.jp/">外務省</a>
+                    <a href="https://www.mof.go.jp/">財務省</a>
+                    <a href="https://www.env.go.jp/">環境省</a>
+                    <a href="https://www.un.org/ja/">国連</a>
+                </div>
+            </div>
+
+            <div class="footer-legal">
+                <div class="container">
+                    <p>© Cabinet Secretariat, Cabinet Public Affairs Office, Government of Japan.</p>
+                    <p>〒100-8968 東京都千代田区永田町1-6-1</p>
+                    <p>代表電話：03-5253-2111（大代表）</p>
+                    <p>このサイトはアクセシビリティ配慮Ver.2対応サイトです</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // 添加平滑滚动效果
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 添加在线调查功能
+        document.querySelector('.interaction-card a[href="#survey"]').addEventListener('click', function (e) {
+            e.preventDefault();
+            alert('調査ページが開きます。');
+        });
+
+        // 添加在线问答功能
+        document.querySelector('.interaction-card a[href="#qa"]').addEventListener('click', function (e) {
+            e.preventDefault();
+            alert('オンライン質問会に参加します。');
+        });
+    </script>
+</body>
+</html>

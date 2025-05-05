@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSUFT FSC | 青春方程式</title>
+    <style>
+        /* 活力主题色 */
+        :root {
+            --orange: #FF6B35;
+            --blue: #31949b;
+            --yellow: #a18d1b;
+            --pink: #7ae26a;
+        }
+
+        body {
+            background: #f8f9fa;
+            font-family: 'Comic Neue', cursive;
+            line-height: 1.6;
+        }
+
+        /* 泡泡导航栏 */
+        .bubble-nav {
+            background: white;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--blue);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            background: var(--yellow);
+            transform: translateY(-3px);
+        }
+
+        /* 动态标题 */
+        .fun-header {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--orange), var(--pink));
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            margin-top: 60px;
+        }
+
+        .header-title {
+            color: white;
+            font-size: 4rem;
+            text-shadow: 3px 3px 0 var(--blue);
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(-10px); }
+            to { transform: translateY(10px); }
+        }
+
+        /* 表情符号装饰 */
+        .emoji-deco {
+            font-size: 2rem;
+            margin: 0 0.5rem;
+        }
+
+        /* 趣味卡片 */
+        .fun-card {
+            background: white;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .fun-card:hover {
+            transform: rotate(-2deg) scale(1.02);
+        }
+
+        /* 车队成员展示 */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .member-card {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .member-card::after {
+            content: "🏎️";
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            font-size: 2rem;
+        }
+
+        /* 进度条 */
+        .progress-bar {
+            height: 20px;
+            background: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--blue), var(--pink));
+            transition: width 1s ease;
+        }
+
+        /* 趣味按钮 */
+        .fun-button {
+            background: var(--orange);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .fun-button:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 5px 15px rgba(255,107,53,0.4);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="bubble-nav">
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link">🏠 首页</a></li>
+            <li><a href="#about" class="nav-link">🚩 关于</a></li>
+            <li><a href="#team" class="nav-link">👥 团队</a></li>
+            <li><a href="#join" class="nav-link">💌 加入</a></li>
+        </ul>
+    </nav>
+
+    <!-- 头部 -->
+    <header class="fun-header" id="home">
+        <h1 class="header-title">
+            <span class="emoji-deco">🚀</span>
+            青春方程式
+            <span class="emoji-deco">💨</span>
+        </h1>
+    </header>
+
+    <!-- 主要内容 -->
+    <main>
+        <!-- 关于我们 -->
+        <section class="fun-card" id="about">
+            <h2>✨ 我们的故事</h2>
+            <p>成立8年 · 获得12项大奖 · 培养200+工程师</p>
+            <div class="progress-bar" style="margin: 2rem 0">
+                <div class="progress" style="width: 75%"></div>
+            </div>
+            <p>当前项目进度：2024赛季新车研发</p>
+        </section>
+
+        <!-- 团队成员 -->
+        <section id="team">
+            <div class="team-grid">
+                <div class="member-card">
+                    <h3>动力组 ⚡</h3>
+                    <p>10位核心成员</p>
+                </div>
+                <div class="member-card">
+                    <h3>设计组 ✏️</h3>
+                    <p>8位创意达人</p>
+                </div>
+                <!-- 添加更多部门 -->
+            </div>
+        </section>
+
+        <!-- 加入我们 -->
+        <section class="fun-card" id="join">
+            <h2>🎯 加入极速战队！</h2>
+            <form style="margin-top: 2rem">
+                <input type="text" placeholder="你的名字" 
+                       style="width:100%; padding: 1rem; margin: 0.5rem 0; border: 2px solid var(--blue); border-radius: 10px">
+                <select style="width:100%; padding: 1rem; margin: 0.5rem 0; border: 2px solid var(--pink); border-radius: 10px">
+                    <option>选择你的超能力 💪</option>
+                    <option>机械设计 👷</option>
+                    <option>程序开发 💻</option>
+                    <option>外观设计 🎨</option>
+                </select>
+                <button class="fun-button" type="submit">马上加入！</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        // 趣味交互效果
+        document.querySelectorAll('.fun-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                button.innerHTML = '发射中... 🚀';
+                setTimeout(() => {
+                    button.innerHTML = '提交成功！🎉';
+                    button.style.backgroundColor = var(--blue);
+                }, 1000);
+            });
+        });
+
+        // 卡片入场动画
+        const cards = document.querySelectorAll('.fun-card');
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.opacity = 1;
+                card.style.transform = 'translateY(0)';
+            }, index * 200);
+        });
+
+        // 进度条动画
+        window.addEventListener('load', () => {
+            document.querySelector('.progress').style.width = '75%';
+        });
+    </script>
+</body>
+</html>

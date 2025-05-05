@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\vsProject\\Project5\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{46327692-7223-46DB-8D0B-3659482AE471}|Project5.vcxproj|D:\\vsProject\\Project5\\HTMLPage2.htm||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{46327692-7223-46DB-8D0B-3659482AE471}|Project5.vcxproj|solutionrelative:HTMLPage2.htm||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46327692-7223-46DB-8D0B-3659482AE471}|Project5.vcxproj|D:\\vsProject\\Project5\\HTMLPage.htm||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{46327692-7223-46DB-8D0B-3659482AE471}|Project5.vcxproj|solutionrelative:HTMLPage.htm||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46327692-7223-46DB-8D0B-3659482AE471}|Project5.vcxproj|D:\\vsProject\\Project5\\test1.htm||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{46327692-7223-46DB-8D0B-3659482AE471}|Project5.vcxproj|solutionrelative:test1.htm||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "test1.htm",
+              "DocumentMoniker": "D:\\vsProject\\Project5\\test1.htm",
+              "RelativeDocumentMoniker": "test1.htm",
+              "ToolTip": "D:\\vsProject\\Project5\\test1.htm",
+              "RelativeToolTip": "test1.htm",
+              "ViewState": "AgIAAP4BAAAAAAAAAAAIwCsCAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-04-06T11:25:43.436Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HTMLPage2.htm",
+              "DocumentMoniker": "D:\\vsProject\\Project5\\HTMLPage2.htm",
+              "RelativeDocumentMoniker": "HTMLPage2.htm",
+              "ToolTip": "D:\\vsProject\\Project5\\HTMLPage2.htm",
+              "RelativeToolTip": "HTMLPage2.htm",
+              "ViewState": "AgIAAJUBAAAAAAAAAAAAAKABAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-04-06T12:29:09.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HTMLPage.htm",
+              "DocumentMoniker": "D:\\vsProject\\Project5\\HTMLPage.htm",
+              "RelativeDocumentMoniker": "HTMLPage.htm",
+              "ToolTip": "D:\\vsProject\\Project5\\HTMLPage.htm",
+              "RelativeToolTip": "HTMLPage.htm",
+              "ViewState": "AgIAAMgBAAAAAAAAAAAAAKMCAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-04-06T07:20:38.417Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
